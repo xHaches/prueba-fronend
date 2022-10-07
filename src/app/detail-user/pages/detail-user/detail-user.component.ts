@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DetailUserModel } from 'src/app/models/detailUser';
-import { UserFromApi } from 'src/app/shared/interfaces/user-from-api';
+import {Subscription} from 'rxjs'
 
 @Component({
   selector: 'app-detail-user',
   templateUrl: './detail-user.component.html',
   styleUrls: ['./detail-user.component.css']
 })
-export class DetailUserComponent implements OnInit {
+export class DetailUserComponent implements OnInit, OnDestroy {
 
   user!: any;
+  userSubscription!: Subscription;
 
   constructor(
     private detailUserService: DetailUserModel,
@@ -18,13 +19,14 @@ export class DetailUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let userParam;
-    console.log(this.route.snapshot.params)
-    
-      this.detailUserService.getUserByName(this.route.snapshot.params['name']).subscribe((usr: any) => {
-        this.user = usr;
-        console.log(this.user);
-      });
+    const nameParam = this.route.snapshot.params['name'];
+    this.userSubscription = this.detailUserService.getUserByName(nameParam).subscribe((usr: any) => {
+      this.user = usr;
+    });
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
 }
