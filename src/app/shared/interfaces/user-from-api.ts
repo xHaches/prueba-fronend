@@ -23,6 +23,7 @@ export interface UserToList {
     name: string;
     id: number;
     url: string;
+    options?: string;
 }
 
 export interface DetailUser {

@@ -4,7 +4,7 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 
 const routes: Routes = [
   {path: 'users', loadChildren:() => import('./users/users.module').then(m => m.UsersModule)},
-  {path: 'detail-user/:id', loadChildren:() => import('./detail-user/detail-user.module').then(m => m.DetailUserModule)},
+  {path: 'detail-user/:name', loadChildren:() => import('./detail-user/detail-user.module').then(m => m.DetailUserModule)},
   {path: '**', component: NotFoundComponent},
   {path: '', pathMatch: 'full', redirectTo: 'users'}
 ];

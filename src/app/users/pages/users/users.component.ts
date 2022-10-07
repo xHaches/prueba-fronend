@@ -3,13 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserModel } from 'src/app/models/user';
 import { delay, take } from 'rxjs/operators';
 import { UserToList } from 'src/app/shared/interfaces/user-from-api';
-
-export interface TableHeaders {
-  name: string;
-  id: number;
-  url: string;
-  options: string;
-}
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -24,11 +18,12 @@ export class UsersComponent implements OnInit {
     // Validators.pattern(/^global/)
   ]);
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['id', 'name', 'url', 'options'];
   dataSource: UserToList[] = [];
 
   constructor(
     private userService: UserModel,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -56,8 +51,15 @@ export class UsersComponent implements OnInit {
     this.userService.getUsersByName(this.name.value).pipe(
       take(1)
     ).subscribe(users => {
-      this.dataSource = users;
+      this.dataSource = users.map((user) => {
+        user.options = 'ver';
+        return user;
+      });
     });
+  }
+
+  selectUser(name: string) {
+    this.router.navigate(['user', name]);
   }
 
 }

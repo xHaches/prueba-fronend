@@ -1,0 +1,13 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{user?.login}}</mat-card-title>
+      <mat-card-subtitle>{{user?.id}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="user?.avatar_url" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        {{user?.html_url}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  

@@ -15,7 +15,7 @@ export class DetailUserModel {
   ) { }
 
   getUserByName(name:string) {
-    return this.http.get(`${this.baseUrl}/${name}`);
+    return this.http.get(`${this.baseUrl}/users/${name}`);
   }
 
 }
