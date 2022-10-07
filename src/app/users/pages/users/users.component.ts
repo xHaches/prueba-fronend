@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   name = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
-    // Validators.pattern(/^global/)
+    Validators.pattern(/^(?!.*global).*$/)
   ]);
 
   displayedColumns: string[] = ['id', 'name', 'url', 'options'];
@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit {
     if (this.name.hasError('minlength')) {
       return 'Debe ser mayor a 5 caracteres';
     }
-    if(this.name.value === 'global') {
+    if(this.name.hasError('pattern')) {
       return 'El nombre ingresado no es válido';
     }
 
