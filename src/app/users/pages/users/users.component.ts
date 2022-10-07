@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { UserModel } from 'src/app/models/user';
-import { delay, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { UserToList } from 'src/app/shared/interfaces/user-from-api';
 import { Router } from '@angular/router';
 

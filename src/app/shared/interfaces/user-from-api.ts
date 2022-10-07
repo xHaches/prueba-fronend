@@ -1,3 +1,9 @@
+export interface Result {
+    total_count: number,
+    incomplete_results: boolean,
+    items: UserFromApi[]
+}
+
 export interface UserFromApi {
     login:               string;
     id:                  number;

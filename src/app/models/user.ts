@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { UserFromApi, UserToList } from '../shared/interfaces/user-from-api';
+import { Result, UserFromApi, UserToList } from '../shared/interfaces/user-from-api';
 
 
 @Injectable({
@@ -17,7 +17,8 @@ export class UserModel {
   ) { }
 
   getUsersByName(name: string) {
-    return this.http.get<UserFromApi[]>(`${this.baseUrl}/users?=${name}`).pipe(
+    return this.http.get<Result>(`${this.baseUrl}/search/users?q=${name}`).pipe(
+      map<Result, UserFromApi[]>(result => result.items),
       map<UserFromApi[], UserToList[]>((users) => 
           users.map(({login, id, url}) => ({
             name: login,
