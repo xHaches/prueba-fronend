@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit {
   }
 
   selectUser(name: string) {
-    this.router.navigate(['user', name]);
+    this.router.navigate(['detail-user', name]);
   }
 
 }

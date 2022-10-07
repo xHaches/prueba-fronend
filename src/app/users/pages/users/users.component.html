@@ -41,7 +41,9 @@
   
     <ng-container matColumnDef="options">
       <th mat-header-cell *matHeaderCellDef> Opciones </th>
-      <td mat-cell *matCellDef="let element"> {{element.options}} </td>
+      <td mat-cell *matCellDef="let element" class="pointer"> 
+        <button mat-raised-button color="primary" (click)="selectUser(element.name)">{{element.options}}</button>
+      </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
